@@ -144,11 +144,22 @@ The Thin MCP server appears in steps 1 and 2 only. It is never in the request pa
 
 ---
 
+## Auth resolution — critical, but out of scope
+
+The whole principle pivots on this: a Thin MCP server returns a **pointer** to where the credential lives, never the credential itself. The agent reads that pointer and resolves it in its own runtime — from an env var, a 1Password vault, a Doppler config, AWS Secrets Manager, or a system the spec doesn't yet name.
+
+That resolution step is **load-bearing**. Without it, every Thin MCP server is a list of unusable pointers. Done badly, it leaks secrets across agents, projects, or processes that shouldn't see them.
+
+It is also **deliberately out of scope for this spec**. Resolution is an agent-side concern, varies sharply per credential system, and depends on the runtime an agent happens to live in (a Node process, a Python notebook, a Claude Desktop session, a CI job). One spec can't responsibly cover all those shapes — and trying would pull Thin MCP back toward mediation, which is exactly what it's meant to avoid.
+
+What the ecosystem needs, and this repo doesn't yet provide, are **reference resolvers** per source: small, focused, runtime-specific helpers that take an `auth_block` and return a credential. One per source — env, 1Password CLI, Doppler API, AWS Secrets Manager, Infisical, and so on. Production implementations like [Joshua](https://usejoshua.com) ship their own; the open question is whether a shared library is useful enough to standardize.
+
+**This is the most valuable thing someone reading this spec could contribute.** If you're building one, open an issue — we want to link it.
+
 ## Out of scope (deliberately)
 
-These belong to the agent, not the server:
+In addition to credential resolution (above), these also belong to the agent, not the server:
 
-- **Credential resolution.** The server hands the agent a pointer; the agent resolves it.
 - **Request execution.** The agent talks to the API directly. No proxy, no middleware.
 - **Response transformation.** The agent reads the raw API response.
 - **Retry, rate-limit, error handling.** Whatever the agent already does for any HTTP call.

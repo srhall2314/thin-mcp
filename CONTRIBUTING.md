@@ -8,6 +8,7 @@ This repo defines a principle ([README.md](./README.md)), a spec ([SPEC.md](./SP
 - **PRs for typos, formatting, and clarity.** Light copy edits help.
 - **PRs to the reference** that more clearly demonstrate the spec. Small only — resist adding features the spec doesn't require.
 - **PRs proposing other-language references** (Python, Go, etc.) — open an issue first so we can discuss whether/how before code lands.
+- **Reference resolvers** — agent-side helpers that take an `auth_block` and resolve it from a specific source (env, 1Password, Doppler, AWS, Infisical, OAuth flows). This is the most valuable thing someone could contribute. Companion repos are also fine — open an issue and we'll link them from the spec.
 
 ## What's not welcome yet
 

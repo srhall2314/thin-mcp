@@ -46,7 +46,7 @@ A thin MCP directory is stateless and portable. Any agent, any project, any inte
 
 It works anywhere MCP works — in agents, in pipelines, in chat. The same directory, the same tool definitions, available to a developer building an autonomous workflow and to a founder asking Claude a question on a Sunday afternoon.
 
-One MCP connection for many differwent API services.  Ideally a user can deliver many diffrent APIs customeized to the user or group for discovery.  This will be implementition dependent.
+One MCP connection for many different API services. Ideally a user can deliver many different APIs customized to the user or group for discovery. This is implementation dependent.
 
 ---
 
@@ -68,7 +68,15 @@ There are two:
 
 **[Joshua](https://usejoshua.com)** — a production implementation. Same two tools, real users, real registrations, real auth pointers across env vars / 1Password / Doppler / vaults. The agent makes the real HTTP request directly; Joshua never sees the credential and is never in the request path.
 
-If you're building something else against this principle, the [SPEC](./SPEC.md) is the contract. 
+If you're building something else against this principle, the [SPEC](./SPEC.md) is the contract.
+
+---
+
+## The open problem
+
+A Thin MCP server hands the agent a pointer to a credential. **The agent has to resolve that pointer.** That step — reading from env, calling 1Password CLI, hitting Doppler or AWS Secrets Manager, handling OAuth — is critical to the principle working in practice and is deliberately not in the spec. It's an agent-side, runtime-specific concern, and one shared library can't responsibly cover it for every environment.
+
+The most useful thing someone reading this could contribute is a **reference resolver** for one of those sources. Open an issue if you're building one — we want to link it.
 
 ---
 
