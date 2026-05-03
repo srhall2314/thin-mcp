@@ -1,6 +1,6 @@
 # The Thin MCP Principle
 
-MCP servers have real value. But that value is **discovery — not mediation**.
+MCP servers have real value. But in many cases that value is **discovery — not mediation**.
 
 ---
 
@@ -46,11 +46,13 @@ A thin MCP directory is stateless and portable. Any agent, any project, any inte
 
 It works anywhere MCP works — in agents, in pipelines, in chat. The same directory, the same tool definitions, available to a developer building an autonomous workflow and to a founder asking Claude a question on a Sunday afternoon.
 
+One MCP connection for many differwent API services.  Ideally a user can deliver many diffrent APIs customeized to the user or group for discovery.  This will be implementition dependent.
+
 ---
 
 ## Why not CLI?
 
-CLI is a legitimate tool. It's the wrong wrapper for this problem.
+CLI is a legitimate tool. Thin-MCP just solves a different problem.
 
 A CLI is environment-bound. It lives on a machine, in a session, tied to a user's local context. Giving an agent CLI access is giving it unstructured capability — it can reach for anything, with no contract about what things are for, no scoped auth, no portable context. CLI doesn't travel — it doesn't work across projects, across agents, or in a chat window.
 
@@ -66,10 +68,10 @@ There are two:
 
 **[Joshua](https://usejoshua.com)** — a production implementation. Same two tools, real users, real registrations, real auth pointers across env vars / 1Password / Doppler / vaults. The agent makes the real HTTP request directly; Joshua never sees the credential and is never in the request path.
 
-If you're building something else against this principle, the [SPEC](./SPEC.md) is the contract. If your server returns the required affordances, it's Thin MCP.
+If you're building something else against this principle, the [SPEC](./SPEC.md) is the contract. 
 
 ---
 
 ## Status
 
-Draft. Comments and PRs welcome — particularly from anyone implementing or considering this shape.
+Draft. Comments and PRs welcome — particularly from anyone implementing or considering this shape.  
