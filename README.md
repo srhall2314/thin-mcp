@@ -1,4 +1,4 @@
-# The Thin MCP Principle
+# Thin MCP
 
 MCP servers have real value. But in many cases that value is **discovery — not mediation**.
 
